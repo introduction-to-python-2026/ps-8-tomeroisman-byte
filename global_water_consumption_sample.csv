@@ -2,11 +2,8 @@ import pandas as pd
 
 filename = list(uploaded.keys())[0]
 df = pd.read_csv(filename)
-
 df.head()
 print("Original columns:", df.columns.tolist())
-
-# Clean column names safely
 df.columns = (
     df.columns
     .astype(str)
@@ -14,13 +11,12 @@ df.columns = (
     .str.lower()
     .str.replace(" ", "_")
 )
-
 print("Cleaned columns:", df.columns.tolist())
+
 import matplotlib.pyplot as plt
 
 country_col = [c for c in df.columns if "country" in c][0]
 water_col = [c for c in df.columns if "water" in c][0]
-
 plt.figure()
 plt.bar(df[country_col], df[water_col])
 plt.xlabel("Country")
